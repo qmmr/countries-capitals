@@ -1,0 +1,45 @@
+<div role="main" ng-controller="CountryListCtrl">
+  <h2>{{title}}</h2>
+  <h3 ng-bind-template="Number of countries: {{getCountriesLength()}}">Number of countries:</h3>
+  <div class="input-append">
+    <input class="span2" id="status" size="16" type="text" ng-model="query" ng-model-instant><button class="btn" type="button" ng-click="clearQuery()"><i class="icon-remove-sign"></i></button>
+  </div>
+  <select name="orderby" id="orderby" ng-model="orderProp">
+    <option value="code">Code</option>
+    <option value="continent">Continent</option>
+    <option value="country">Country</option>
+    <option value="country_population">Population</option>
+    <option value="capital">Capital</option>
+    <option value="city_population">City population</option>
+  </select>
+
+  <h4 ng-bind-template="Order by: {{orderProp}}">Order by:</h4>
+  <table class="table table-striped table-bordered">
+    <caption>Countries of the World</caption>
+    <thead>
+      <tr>
+        <th style="width: 48px">Flag</th>
+        <th>Code</th>
+        <th>Continent</th>
+        <th>Country</th>
+        <th>Population</th>
+        <th>Capital</th>
+        <th>City population</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="c in countries | filter:query | orderBy:orderProp">
+        <td><a href="#/countries/{{c.country}}"><img src="img/flags/{{c.country}}-Flag-48.png"></a></td>
+        <td>{{c.code}}</td>
+        <td>{{c.continent}}</td>
+        <td><a href="http://en.wikipedia.org/wiki/{{c.country}}" target="_blank">{{c.country}}</a></td>
+        <td>{{c.country_population}}</td>
+        <td><a href="http://en.wikipedia.org/wiki/{{c.capital}}" target="_blank">{{c.capital}}</a></td>
+        <td>{{c.city_population}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <code>
+    <!-- {{countries | json}} -->
+  </code>
+</div>
